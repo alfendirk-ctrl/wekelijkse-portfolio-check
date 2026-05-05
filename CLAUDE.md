@@ -1,4 +1,36 @@
-# Aandelen Briefing — Claude Code Routine
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+---
+
+## Architectuur
+
+Dit is een twee-staps automatiseringspipeline:
+
+1. **Claude Code Routine** (maandag 08:00) — voert de instructies in dit bestand uit: leest `watchlist.json`, haalt actuele data op via web search, genereert `email_final.html`, en commit + pusht naar `main`.
+2. **GitHub Action** (`.github/workflows/send_email.yml`, maandag 08:15) — checkt de repo uit, draait `send_email.py`, en verstuurt `email_final.html` via Gmail SMTP naar `GMAIL_USER`.
+
+`send_email.py` leest `GMAIL_USER` en `GMAIL_APP_PASSWORD` uit de omgeving en verstuurt de HTML als e-mail van en naar hetzelfde adres.
+
+### Bestanden
+
+| Bestand | Doel |
+|---|---|
+| `watchlist.json` | Aandelen op de watchlist (ticker, naam, exchange) |
+| `send_email.py` | Verstuurt `email_final.html` via Gmail SMTP |
+| `.github/workflows/send_email.yml` | GitHub Action — triggert 15 min na de routine |
+| `email_final.html` | Gegenereerde briefing; wordt elke week overschreven |
+
+### Benodigde omgevingsvariabelen
+
+- `GH_PAT` — GitHub PAT met `repo` scope (voor git push vanuit de routine)
+- `GMAIL_USER` — Gmail-adres (verzender én ontvanger)
+- `GMAIL_APP_PASSWORD` — Gmail App Password
+
+---
+
+## Aandelen Briefing — Claude Code Routine
 
 Je genereert elke maandag om 08:00 een HTML e-mail briefing over de aandelen op de watchlist.
 Het resultaat schrijf je weg als `email_final.html` in de root van deze repo, en je commit en pusht naar GitHub.

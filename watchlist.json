@@ -1,0 +1,22 @@
+{
+  "watchlist": [
+    { "ticker": "AIR",  "name": "AAR Corp",              "exchange": "NYSE"   },
+    { "ticker": "RDDT", "name": "Reddit",                 "exchange": "NYSE"   },
+    { "ticker": "TSLA", "name": "Tesla",                  "exchange": "NASDAQ" },
+    { "ticker": "AAPL", "name": "Apple",                  "exchange": "NASDAQ" },
+    { "ticker": "SPOT", "name": "Spotify",                "exchange": "NYSE"   },
+    { "ticker": "UNH",  "name": "UnitedHealth Group",     "exchange": "NYSE"   },
+    { "ticker": "MSFT", "name": "Microsoft",              "exchange": "NASDAQ" },
+    { "ticker": "SHOP", "name": "Shopify",                "exchange": "NYSE"   },
+    { "ticker": "NESN", "name": "Nestlé",                 "exchange": "SWX"    },
+    { "ticker": "LOGN", "name": "Logitech",               "exchange": "NASDAQ" },
+    { "ticker": "CRWD", "name": "CrowdStrike",            "exchange": "NASDAQ" },
+    { "ticker": "CRM",  "name": "Salesforce",             "exchange": "NYSE"   },
+    { "ticker": "CRCL", "name": "Circle Internet",        "exchange": "NYSE"   },
+    { "ticker": "NVDA", "name": "NVIDIA",                 "exchange": "NASDAQ" },
+    { "ticker": "LMT",  "name": "Lockheed Martin",        "exchange": "NYSE"   },
+    { "ticker": "ASML", "name": "ASML Holding",           "exchange": "NASDAQ" },
+    { "ticker": "WKL",  "name": "Wolters Kluwer",         "exchange": "AMS"    }
+  ],
+  "updated": "2026-05-05"
+}

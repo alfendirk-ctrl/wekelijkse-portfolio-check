@@ -1,9 +1,12 @@
 name: Verstuur Aandelen Briefing
 
 on:
+  push:
+    paths:
+      - "email_final.html"   # triggert zodra de routine email_final.html pusht
   schedule:
-    - cron: "15 8 * * 1"   # elke maandag 08:15 (UTC+2 → pas aan indien nodig)
-  workflow_dispatch:        # handmatig triggeren voor testen
+    - cron: "15 8 * * 1"    # elke maandag 08:15 UTC
+  workflow_dispatch:         # handmatig triggeren voor testen
 
 jobs:
   send-email:
@@ -13,12 +16,24 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Controleer of email_final.html bestaat
+        id: check_file
+        run: |
+          if [ ! -f email_final.html ]; then
+            echo "email_final.html niet gevonden — briefing nog niet gegenereerd. Stap over."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Set up Python
+        if: steps.check_file.outputs.skip == 'false'
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Verstuur briefing
+        if: steps.check_file.outputs.skip == 'false'
         env:
           GMAIL_USER:         ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}

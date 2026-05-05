@@ -1,0 +1,25 @@
+name: Verstuur Aandelen Briefing
+
+on:
+  schedule:
+    - cron: "15 8 * * 1"   # elke maandag 08:15 (UTC+2 → pas aan indien nodig)
+  workflow_dispatch:        # handmatig triggeren voor testen
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verstuur briefing
+        env:
+          GMAIL_USER:         ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: python send_email.py
